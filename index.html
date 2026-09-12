@@ -77,43 +77,6 @@
             font-weight: 300;
         }
 
-        .divider {
-            width: 50px;
-            height: 2px;
-            background: #8b2e2e;
-            margin: 24px auto 0;
-        }
-
-        /* Search/Filter Section */
-        .search-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .search-box {
-            max-width: 500px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 14px 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 6px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: #8b2e2e;
-            box-shadow: 0 0 0 3px rgba(139, 46, 46, 0.1);
-        }
-
         /* Gallery */
         .gallery {
             max-width: 1200px;
@@ -321,6 +284,68 @@
             color: #8b2e2e;
         }
 
+        /* Breadcrumb / Back Navigation */
+        .breadcrumb-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px 20px;
+            display: none;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .breadcrumb-nav.active {
+            display: flex;
+        }
+
+        .back-btn {
+            background: none;
+            border: 1.5px solid #e0e0e0;
+            color: #2c2c2c;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .back-btn:hover {
+            border-color: #8b2e2e;
+            color: #8b2e2e;
+        }
+
+        .brand-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        /* Brand Cards */
+        .brand-card .catalog-icon {
+            font-size: 40px;
+        }
+
+        .brand-card .catalog-name {
+            font-size: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .model-count {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 4px 12px;
+            background: #f5eaea;
+            color: #8b2e2e;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
         /* Footer */
         .footer {
             background: white;
@@ -346,7 +371,6 @@
 
             .header-content,
             .hero,
-            .search-section,
             .footer {
                 padding: 20px;
             }
@@ -388,15 +412,12 @@
     <!-- Hero Section -->
     <div class="hero">
         <h1>Exhibition Catalogs</h1>
-        <p>Explore our premium collection of product catalogs</p>
-        <div class="divider"></div>
     </div>
 
-    <!-- Search Section -->
-    <div class="search-section">
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search catalogs...">
-        </div>
+    <!-- Breadcrumb / Back Navigation -->
+    <div class="breadcrumb-nav" id="breadcrumbNav">
+        <button class="back-btn" onclick="showBrandView()">← Back to Brands</button>
+        <div class="brand-title" id="brandTitle"></div>
     </div>
 
     <!-- Gallery -->
@@ -425,39 +446,78 @@
     </div>
 
     <script>
+        // NOTE: order below is fixed — printed QR codes reference catalogs by
+        // position (?catalog=1..25). Only ever APPEND new catalogs at the end.
         const catalogs = [
-            { name: 'DEX32_52DM', file: 'Catalogs/Catalogs/DEX32_52DM.pdf' },
-            { name: 'DY 1411PSF-D', file: 'Catalogs/Catalogs/DY 1411PSF-D.pdf' },
-            { name: 'DY 1509 PD', file: 'Catalogs/Catalogs/DY 1509 PD.pdf' },
-            { name: 'DY 1790S', file: 'Catalogs/Catalogs/DY 1790S.pdf' },
-            { name: 'DY 2210G', file: 'Catalogs/Catalogs/DY 2210G.pdf' },
-            { name: 'DY 3020', file: 'Catalogs/Catalogs/DY 3020.pdf' },
-            { name: 'DY 430GT-01', file: 'Catalogs/Catalogs/DY 430GT-01.pdf' },
-            { name: 'DY 438GT LA 971', file: 'Catalogs/Catalogs/DY 438GT LA 971.pdf' },
-            { name: 'DY 4406P-D', file: 'Catalogs/Catalogs/DY 4406P-D.pdf' },
-            { name: 'DY 5030', file: 'Catalogs/Catalogs/DY 5030.pdf' },
-            { name: 'DY GC510-360 SERIES', file: 'Catalogs/Catalogs/DY GC510-360 SERIES.pdf' },
-            { name: 'DY R9', file: 'Catalogs/Catalogs/DY R9.pdf' },
-            { name: 'FB 450-12-0640', file: 'Catalogs/Catalogs/FB 450-12-0640.pdf' },
-            { name: 'FB450', file: 'Catalogs/Catalogs/FB450.pdf' },
-            { name: 'IEX32_52DM', file: 'Catalogs/Catalogs/IEX32_52DM.pdf' },
-            { name: 'JT A8', file: 'Catalogs/Catalogs/JT A8.pdf' },
-            { name: 'JTK 18F', file: 'Catalogs/Catalogs/JTK 18F.pdf' },
-            { name: 'JTK6-60A', file: 'Catalogs/Catalogs/JTK6-60A.pdf' },
-            { name: 'LS6021NP', file: 'Catalogs/Catalogs/LS6021NP.pdf' },
-            { name: 'LS9231C', file: 'Catalogs/Catalogs/LS9231C.pdf' },
-            { name: 'NF 1104_1106', file: 'Catalogs/Catalogs/NF 1104_1106.pdf' },
-            { name: 'VIOS 669', file: 'Catalogs/Catalogs/VIOS 669.pdf' },
-            { name: 'VIOS 867', file: 'Catalogs/Catalogs/VIOS 867.pdf' },
-            { name: 'VIOS 868', file: 'Catalogs/Catalogs/VIOS 868.pdf' },
-            { name: 'DY G36', file: 'Catalogs/Catalogs/DY G36.pdf' }
+            { name: 'DEX32_52DM', file: 'Catalogs/Catalogs/DEX32_52DM.pdf', brand: 'HUATANG LOIVA' },
+            { name: 'DY 1411PSF-D', file: 'Catalogs/Catalogs/DY 1411PSF-D.pdf', brand: 'DUKE' },
+            { name: 'DY 1509 PD', file: 'Catalogs/Catalogs/DY 1509 PD.pdf', brand: 'DUKE' },
+            { name: 'DY 1790S', file: 'Catalogs/Catalogs/DY 1790S.pdf', brand: 'DUKE' },
+            { name: 'DY 2210G', file: 'Catalogs/Catalogs/DY 2210G.pdf', brand: 'DUKE' },
+            { name: 'DY 3020', file: 'Catalogs/Catalogs/DY 3020.pdf', brand: 'DUKE' },
+            { name: 'DY 430GT-01', file: 'Catalogs/Catalogs/DY 430GT-01.pdf', brand: 'DUKE' },
+            { name: 'DY 438GT LA 971', file: 'Catalogs/Catalogs/DY 438GT LA 971.pdf', brand: 'DUKE' },
+            { name: 'DY 4406P-D', file: 'Catalogs/Catalogs/DY 4406P-D.pdf', brand: 'DUKE' },
+            { name: 'DY 5030', file: 'Catalogs/Catalogs/DY 5030.pdf', brand: 'DUKE' },
+            { name: 'DY GC510-360 SERIES', file: 'Catalogs/Catalogs/DY GC510-360 SERIES.pdf', brand: 'DUKE' },
+            { name: 'DY R9', file: 'Catalogs/Catalogs/DY R9.pdf', brand: 'DUKE' },
+            { name: 'FB 450-12-0640', file: 'Catalogs/Catalogs/FB 450-12-0640.pdf', brand: 'HUATANG LOIVA' },
+            { name: 'FB450', file: 'Catalogs/Catalogs/FB450.pdf', brand: 'HUATANG LOIVA' },
+            { name: 'IEX32_52DM', file: 'Catalogs/Catalogs/IEX32_52DM.pdf', brand: 'HUATANG LOIVA' },
+            { name: 'JT A8', file: 'Catalogs/Catalogs/JT A8.pdf', brand: 'JUITA' },
+            { name: 'JTK 18F', file: 'Catalogs/Catalogs/JTK 18F.pdf', brand: 'JUITA' },
+            { name: 'JTK6-60A', file: 'Catalogs/Catalogs/JTK6-60A.pdf', brand: 'JUITA' },
+            { name: 'LS6021NP', file: 'Catalogs/Catalogs/LS6021NP.pdf', brand: 'LENSH' },
+            { name: 'LS9231C', file: 'Catalogs/Catalogs/LS9231C.pdf', brand: 'LENSH' },
+            { name: 'NF 1104_1106', file: 'Catalogs/Catalogs/NF 1104_1106.pdf', brand: 'HUATANG LOIVA' },
+            { name: 'VIOS 669', file: 'Catalogs/Catalogs/VIOS 669.pdf', brand: 'VIOS' },
+            { name: 'VIOS 867', file: 'Catalogs/Catalogs/VIOS 867.pdf', brand: 'VIOS' },
+            { name: 'VIOS 868', file: 'Catalogs/Catalogs/VIOS 868.pdf', brand: 'VIOS' },
+            { name: 'DY G36', file: 'Catalogs/Catalogs/DY G36.pdf', brand: 'DUKE' }
         ];
+
+        // Brand display order (alphabetical)
+        const BRANDS = ['DUKE', 'HUATANG LOIVA', 'JUITA', 'LENSH', 'VIOS'];
 
         const modal = document.getElementById('pdfModal');
         const gallery = document.getElementById('gallery');
-        const searchInput = document.getElementById('searchInput');
+        const breadcrumbNav = document.getElementById('breadcrumbNav');
+        const brandTitle = document.getElementById('brandTitle');
 
-        function createGallery(itemsToShow = catalogs) {
+        let currentBrand = null;
+
+        function renderBrands() {
+            currentBrand = null;
+            breadcrumbNav.classList.remove('active');
+            gallery.innerHTML = '';
+            BRANDS.forEach(brand => {
+                const count = catalogs.filter(c => c.brand === brand).length;
+                const card = document.createElement('div');
+                card.className = 'catalog-card brand-card';
+                card.onclick = () => showCatalogView(brand);
+                card.innerHTML = `
+                    <div class="catalog-icon">🏷️</div>
+                    <div class="catalog-info">
+                        <div class="catalog-name">${brand}</div>
+                        <div class="model-count">${count} Model${count !== 1 ? 's' : ''}</div>
+                    </div>
+                `;
+                gallery.appendChild(card);
+            });
+        }
+
+        function showCatalogView(brand) {
+            currentBrand = brand;
+            breadcrumbNav.classList.add('active');
+            brandTitle.textContent = brand;
+            renderCatalogCards(catalogs.filter(c => c.brand === brand));
+        }
+
+        function showBrandView() {
+            renderBrands();
+        }
+
+        function renderCatalogCards(itemsToShow) {
             gallery.innerHTML = '';
             itemsToShow.forEach(catalog => {
                 const card = document.createElement('div');
@@ -495,14 +555,6 @@
             link.click();
         }
 
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            const filtered = catalogs.filter(catalog =>
-                catalog.name.toLowerCase().includes(query)
-            );
-            createGallery(filtered);
-        });
-
         window.onclick = (event) => {
             if (event.target === modal) {
                 closeModal();
@@ -531,7 +583,7 @@
             }
         }
 
-        createGallery();
+        renderBrands();
         openCatalogFromUrl();
     </script>
 </body>
