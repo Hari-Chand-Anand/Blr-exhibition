@@ -45,7 +45,7 @@ catalogs = [
 # ============================================================
 # IMPORTANT: Set this to your final website URL before printing
 # ============================================================
-BASE_URL = 'https://yourwebsite.com'  # <-- CHANGE THIS
+BASE_URL = 'https://blr-exhibition.vercel.app'
 
 QR_SIZE = 400          # QR code image size (px, square)
 LABEL_HEIGHT = 70       # space reserved for text below QR
