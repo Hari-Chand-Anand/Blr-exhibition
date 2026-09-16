@@ -47,6 +47,7 @@ catalogs = [
     ('LOIVA ST21', 'LOIVA ST21.pdf', 'HUATANG LOIVA'),
     ('DUKE Q1 Tagging Machine', 'DUKE Q1_Tagging Machine.pdf', 'DUKE'),
     ('DY 878', 'DY 878.pdf', 'DUKE'),
+    ('DY2210BS-XZ', 'DY2210BS-XZ.pdf', 'DUKE'),
 ]
 
 # ============================================================
