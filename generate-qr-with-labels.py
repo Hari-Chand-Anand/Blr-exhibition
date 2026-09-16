@@ -46,6 +46,7 @@ catalogs = [
     ('DY G36', 'DY G36.pdf', 'DUKE'),
     ('LOIVA ST21', 'LOIVA ST21.pdf', 'HUATANG LOIVA'),
     ('DUKE Q1 Tagging Machine', 'DUKE Q1_Tagging Machine.pdf', 'DUKE'),
+    ('DY 878', 'DY 878.pdf', 'DUKE'),
 ]
 
 # ============================================================
